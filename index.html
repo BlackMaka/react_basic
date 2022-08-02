@@ -13,10 +13,16 @@
   <script>
     //기본 html dom다루기
     const rootElement = document.getElementById("root");
-    const element = React.createElement("h1", { children:"Hello, World" } );
-    console.log(element);
-    //const element = document.createElement("h1");
-    //rootElement.appendChild(element);
+    // const element = React.createElement("h1", {
+    //   className:"title",
+    //   children:"Hello, World1"
+    // }, "Hello, World2" );
+    //Hello, World2 
+    const element = React.createElement("h1", {
+      className:"title",
+      children:["Hello, World1", " It's me", "zzz1"]
+    }, ["Hello, World1", " It's me", "zzz2"]);
+
     ReactDOM.render(element, rootElement);
   </script>
 </body>
