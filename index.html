@@ -12,15 +12,12 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    //JSX : React.createElement 표현식
-    //Babel : javascript compiler 
     const rootElement = document.getElementById("root");
-    
     const element = <React.Fragment className="box" children={
       [
-      React.createElement("h1", null, "Hi"),
-      React.createElement("h3", null, "Bye"),
-      React.createElement("h5", null, "gg"),
+      <h1>Hi</h1>,
+      <h3>Bye</h3>,
+      <h5>gg</h5>,
       ]
     }/>
     ReactDOM.render(element, rootElement);
