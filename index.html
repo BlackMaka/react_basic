@@ -13,12 +13,29 @@
   <div id="root"></div>
   <script type="text/babel">
     const rootElement = document.getElementById("root");
-    const element = 
-    <React.Fragment className="box">
-      <h1>Hi</h1>
-      <h3>Bye</h3>
-      <h5>gg</h5>
-    </React.Fragment>
+    const paint = (title, description) =>(
+      <>
+        <h1>{title}</h1>
+        <h3>{description}</h3>
+      </>
+    )
+    const Paint = ({title, description, children}) =>(
+      <>
+        <h1>{title}</h1>
+        <h3>{description}</h3>
+        {children}
+      </>
+    )
+
+    const element = <>
+        {paint('제목','아앙')}
+        {paint('내용', '기모')}
+        {paint('풋', '링')}
+        <Paint title="제목" description="ㅇㅇㅇㅇㅇ">
+          <span>ㅇㅇㅇㅇㅇㅇㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷㄷ</span>  
+        </Paint>
+    </>
+    
     ReactDOM.render(element, rootElement);
   </script>
 </body>
