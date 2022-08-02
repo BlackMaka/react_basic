@@ -15,10 +15,14 @@
     //JSX : React.createElement 표현식
     //Babel : javascript compiler 
     const rootElement = document.getElementById("root");
-    const text = "Hello, World";
-    const className = "title";
-    const props = { className:className, children:text };
-    const element = <h1 {...props}/>
+    
+    const element = <React.Fragment className="box" children={
+      [
+      React.createElement("h1", null, "Hi"),
+      React.createElement("h3", null, "Bye"),
+      React.createElement("h5", null, "gg"),
+      ]
+    }/>
     ReactDOM.render(element, rootElement);
   </script>
 </body>
