@@ -13,7 +13,16 @@
   <div id="root"></div>
   <script type="text/babel">
     const rootElement = document.getElementById("root");
-    
+    const Child = () =>{
+      console.log("Child render start");
+      const element = (
+        <>
+          <input type="text"/>
+        </>
+      )
+      console.log("Child reder end");
+      return element;
+    }
     const App = () => {
       
       console.log("====App render start====");
@@ -38,20 +47,19 @@
         console.log("검색 클릭");
         setShow(prev => !prev); //setState의 첫 번째 인자는 이전값이다..
       }
+      console.log("====App render end====");
       return (
         <>
           <button onClick={handleClick}>검색</button>
           {show ?
-            <>
-              <input type="text"/>
-            </>
+            <Child/>
             : null
           }
         </>
       )
     }
     ReactDOM.render(<App />, rootElement);
-    console.log("====App render end====");
+    
   </script>
 </body>
 </html>
