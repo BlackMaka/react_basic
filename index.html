@@ -14,44 +14,44 @@
   <script type="text/babel">
     const rootElement = document.getElementById("root");
     
-    function useLocalStorage(target, initial = ""){
-      const [state, setState] = React.useState(()=> window.localStorage.getItem(target) || initial);
-      
-      React.useEffect(()=>{
-        window.localStorage.setItem(target, state);
-      }, [state])
-
-      return [state, setState];
-    }    
-
     const App = () => {
-      console.log('render');
-      const [keyword, setKeyword] = useLocalStorage("keyword");
-      const [typing, setTyping] = useLocalStorage("typing", false);
-      const [result, setResut] = useLocalStorage("result");
-
       
-      function handleInput(event) {
-        setKeyword(event.target.value);
-        setTyping(true);
-      };
+      console.log("====App render start====");
+
+      const [ show, setShow] = React.useState(()=>{
+        console.log('App useSate');
+        return false;
+      });
+
+      //사이드 이펙트라.. 일단 전부 렌더링 되고 나서 동작함
+      React.useEffect(()=>{
+        console.log('useEffect no deps');
+      })
+      React.useEffect(()=>{
+        console.log('useEffect empty deps');
+      },[])
+      React.useEffect(()=>{
+        console.log('useEffect deps [show]');
+      },[show])
 
       function handleClick(){
-        setTyping(false);
-        setResut(`We find result! : ${keyword}`);
-      };
-      
+        console.log("검색 클릭");
+        setShow(prev => !prev); //setState의 첫 번째 인자는 이전값이다..
+      }
       return (
         <>
-          <input type="text" onChange={handleInput} value={keyword} />
-          <button onClick={handleClick}>찾기</button>
-          
-          <p>{typing ? `Looking for... ${keyword}`: result}</p>
+          <button onClick={handleClick}>검색</button>
+          {show ?
+            <>
+              <input type="text"/>
+            </>
+            : null
+          }
         </>
       )
     }
-
     ReactDOM.render(<App />, rootElement);
+    console.log("====App render end====");
   </script>
 </body>
 </html>
