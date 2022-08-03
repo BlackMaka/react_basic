@@ -38,6 +38,7 @@
         console.log("검색 클릭");
         setShow(prev => !prev); //setState의 첫 번째 인자는 이전값이다..
       }
+      console.log("====App render end====");
       return (
         <>
           <button onClick={handleClick}>검색</button>
@@ -51,7 +52,6 @@
       )
     }
     ReactDOM.render(<App />, rootElement);
-    console.log("====App render end====");
   </script>
 </body>
 </html>
