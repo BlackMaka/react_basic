@@ -14,27 +14,33 @@
   <script type="text/babel">
     const rootElement = document.getElementById("root");
     
+    function useLocalStorage(target, initial = ""){
+      const [state, setState] = React.useState(()=> window.localStorage.getItem(target) || initial);
+      
+      React.useEffect(()=>{
+        window.localStorage.setItem(target, state);
+      }, [state])
+
+      return [state, setState];
+    }    
+
     const App = () => {
       console.log('render');
-      //localStorage 같이 I/O로 동작하는 애들은 비동기로 동작하기 때문에.... 못읽어올 수도 있음.. ()=> 함수로 LAZY하게
-      const [keyword, setKeyword] = React.useState(()=> window.localStorage.getItem("keyword"));
+      const [keyword, setKeyword] = useLocalStorage("keyword");
+      const [typing, setTyping] = useLocalStorage("typing", false);
+      const [result, setResut] = useLocalStorage("result");
 
-      const [typing, setTyping] = React.useState(false);
-      const [result, setResut] = React.useState("");
-
-      React.useEffect(()=>{
-        window.localStorage.setItem("keyword", keyword);
-      }, [keyword])
       
       function handleInput(event) {
-        //window.localStorage.setItem("keyword", event.target.value);
         setKeyword(event.target.value);
         setTyping(true);
       };
+
       function handleClick(){
         setTyping(false);
         setResut(`We find result! : ${keyword}`);
       };
+      
       return (
         <>
           <input type="text" onChange={handleInput} value={keyword} />
