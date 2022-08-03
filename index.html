@@ -13,34 +13,31 @@
   <div id="root"></div>
   <script type="text/babel">
     const rootElement = document.getElementById("root");
-    const state = { keyword:"", typing:false, result:""};
+    
     const App = () => {
+      const [keyword, setKeyword] = React.useState("");
+      const [typing, setTyping] = React.useState(false);
+      const [result, setResut] = React.useState("");
+      
       function handleInput(event) {
-        setState({keyword:event.target.value, typing:true});
+        setKeyword(event.target.value);
+        setTyping(true);
       };
       function handleClick(){
-        setState({typing:false, result:state.keyword});
+        setTyping(false);
+        setResut(`We find result! : ${keyword}`);
       };
       return (
         <>
           <input type="text" onKeyUp={handleInput}/>
           <button onClick={handleClick}>찾기</button>
           
-          { state.typing? `typing keyword...${state.keyword}` : `We find result ! ${state.result}`}
+          <p>{typing ? `Looking for... ${keyword}`: result}</p>
         </>
       )
     }
 
-    function setState(newState){
-      Object.assign(state, newState);
-      console.log(state);
-      render();
-    }
-
-    function render(){
-      ReactDOM.render(<App />, rootElement);
-    }
-    render();
+    ReactDOM.render(<App />, rootElement);
   </script>
 </body>
 </html>
