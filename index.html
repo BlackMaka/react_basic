@@ -8,47 +8,35 @@
   <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>
-    .button {
-      background-color: #4CAF50; /* Green */
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-    }
-    
-    .blue {background-color: #008CBA;} /* Blue */
-    .red {background-color: #f44336;} /* Red */ 
-    .grey {background-color: #e7e7e7; color: black;} /* Grey */ 
-    .black {background-color: #555555;} /* Black */
-  </style>
 </head>
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    function Button({className, color, style, ...rest}){
-      return <button 
-                className={`button ${className} ${color}` } 
-                style={{fontSize:30, ...style}}  
-                {...rest}>
-             </button>
-    }
+    
     const rootElement = document.getElementById("root");
-    const element = (
-      <>
-        <Button style={{borderRadius:"50%"}}>Green</Button>
-        <Button color="blue" style={{borderRadius: 8, fontSize:10}}>Blue</Button>
-        <Button color="red">Red</Button>
-        <Button color="grey">Grey</Button>
-        <Button color="black">Black</Button>
-      </>
-    )
-    ReactDOM.render(element, rootElement);
+
+    const App = () =>{
+      const inputRef = React.useRef();
+      const divRef = React.useRef();
+      React.useEffect(()=>{
+        inputRef.current.focus();
+        const timer = setTimeout(() => {
+          divRef.current.style.backgroundColor = 'pink';
+        }, 1000);
+        return ()=>{
+          clearTimeout(timer);
+        }
+      },[])
+      return (   
+        <>
+          <input ref={inputRef} />
+          <div ref={divRef} style={{height:100, width:100, backgroundColor: 'brown'}}></div>
+        </>
+      )
+    }
+    
+    
+    ReactDOM.render(<App/>, rootElement);
     
   </script>
 </body>
