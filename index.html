@@ -16,28 +16,36 @@
     const rootElement = document.getElementById("root");
 
     const App = () =>{
-      const inputRef = React.useRef();
-      const divRef = React.useRef();
-      React.useEffect(()=>{
-        inputRef.current.focus();
-        const timer = setTimeout(() => {
-          divRef.current.style.backgroundColor = 'pink';
-        }, 1000);
-        return ()=>{
-          clearTimeout(timer);
-        }
-      },[])
+      function handleSubmit(event){
+        event.preventDefault();
+        console.dir(event);
+        alert(`firstName:${event.target.elements.fname.value}
+        , lastName:${event.target.elements.lname.value}
+        , choose Car : ${event.target.elements.country.value}`)
+      }
       return (   
         <>
-          <input ref={inputRef} />
-          <div ref={divRef} style={{height:100, width:100, backgroundColor: 'brown'}}></div>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="fname">First Name</label>
+          <input type="text" id="fname" name="firstname" placeholder="Your name.."  defaultValue="sdasa"/>
+          <br/>
+          <label htmlFor="lname">Last Name</label>
+          <input type="text" id="lname" name="lastname" placeholder="Your last name.." defaultValue="zzz" />
+          <br/>
+          <label htmlFor="country">Country</label>
+          <select id="country" name="country">
+            <option value="australia">Australia</option>
+            <option value="canada">Canada</option>
+            <option value="usa">USA</option>
+          </select>
+          <br/>
+        
+          <input type="submit" value="Submit" />
+        </form>
         </>
       )
     }
-    
-    
     ReactDOM.render(<App/>, rootElement);
-    
   </script>
 </body>
 </html>
